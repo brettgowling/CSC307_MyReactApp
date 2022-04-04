@@ -20,6 +20,10 @@ function MyApp() {
       name: 'Dennis',
       job: 'Bartender',
     },
+    {
+      name: 'Brett',
+      job: 'Mario Kart Master',
+    }
   ]);  
 
   function removeOneCharacter (index) {
