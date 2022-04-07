@@ -3,6 +3,10 @@ const app = express();
 const port = 5001;
 const cors = require('cors');
 
+const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMONPQRSTUVWXYZ';
+const characters_length = 62;
+
+
 const users = { 
     users_list :
     [
@@ -95,9 +99,18 @@ const findUserByNameAndJob = (name,job) => {
 
 app.post('/users', (req, res) => {
     const userToAdd = req.body;
+    giveUserAnID(userToAdd);
     addUser(userToAdd);
     res.status(201).end();
 });
+
+function giveUserAnID(user){
+    var id = '';
+    for(var i = 0; i < 6; i++){
+        id += characters.charAt(Math.floor(Math.random() * characters_length));
+    }
+    user['id'] = id;
+}
 
 function addUser(user){
     users['users_list'].push(user);
