@@ -101,6 +101,9 @@ app.post('/users', (req, res) => {
     const userToAdd = req.body;
     giveUserAnID(userToAdd);
     addUser(userToAdd);
+
+    /* res.send(userToAdd); */   /* Is this how I send the json object? */
+
     res.status(201).end();
 });
 
@@ -124,7 +127,7 @@ app.delete('/users/:id', (req, res) => {
     else {
         result = {users_list: result};
         delUser(result);
-        res.status(200).end();
+        res.status(204).end();
     }
 });
 
