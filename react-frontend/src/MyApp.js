@@ -7,31 +7,30 @@ import axios from 'axios';
 function MyApp() {
   const [characters, setCharacters] = useState([]);  
 
-  function removeOneCharacter (index) {
+  function removeOneCharacter (index, id) {
+    makeDeleteCall(id);
     const updated = characters.filter((character, i) => {
         return i !== index
       });
       setCharacters(updated);
     }
 
-  /* function makeDeleteCall(id){
+   async function makeDeleteCall(id){
     try{
-      const response = await axios.delete('http://localhost:5001/users', id);
+      const response = await axios.delete('http://localhost:5001/users/' + id);
       return response;
     }
     catch(error){
       console.log(error);
       return false;
-    }
-  } */
+    } 
+  }
 
   function updateList(person) { 
     makePostCall(person).then( result => {
     if (result && result.status === 201)
         
-        /* person = result.data; */     /* I want to return the res.send() json object */
-        
-        setCharacters([...characters, person] );
+        setCharacters([...characters, result.data] );
     });
   }
 

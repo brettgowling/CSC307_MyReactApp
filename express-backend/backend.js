@@ -101,10 +101,7 @@ app.post('/users', (req, res) => {
     const userToAdd = req.body;
     giveUserAnID(userToAdd);
     addUser(userToAdd);
-
-    /* res.send(userToAdd); */   /* Is this how I send the json object? */
-
-    res.status(201).end();
+    res.status(201).send(userToAdd);
 });
 
 function giveUserAnID(user){
@@ -133,7 +130,7 @@ app.delete('/users/:id', (req, res) => {
 
 function delUser(user){
     const index = users['users_list'].indexOf(user);
-    users['users_list'].splice(index, 1);
+    return users['users_list'].splice(index, 1);
 }
 
 app.listen(port, () => {
